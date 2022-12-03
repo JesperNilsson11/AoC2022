@@ -2,6 +2,7 @@
 *.d
 *.txt
 .token
+.vscode/*
 
 # Compiled Object files
 *.slo
