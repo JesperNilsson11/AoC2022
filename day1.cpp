@@ -1,19 +1,10 @@
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <algorithm>
+#include "common.h"
 
-using namespace std;
-
-
-int main() {
+void task(int elves) {
     ifstream input("input1.txt");
     int data;
     string line;
-
-    // task 1 = 1 task = 3
-    vector<int> max(3);
+    vector<int> max(elves);
     
     int current = 0;
     while (getline(input, line)) {
@@ -35,4 +26,9 @@ int main() {
         sum += i;
     }
     cout << sum << endl;
+}
+
+int main() {
+    task(1);
+    task(3);
 }

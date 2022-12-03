@@ -1,36 +1,30 @@
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <algorithm>
+#include "common.h"
 
-using namespace std;
-
-
-int main() {
+void task1() {
     ifstream input("input2.txt");
-    //ifstream input("example.txt");
     int sum = 0;
     char opponent, me;
 
-    /*while (input >> opponent) {
+    while (input >> opponent) {
         input >> me;
-        //cout << opponent << " " << me;
         me -= 'X';
         opponent -= 'A';
         sum += me + 1;
-        //cout << " + " << me+1;
 
         if (opponent == me) {
             sum += 3;
-            //cout << " draw +3 " << endl;
         } else if (((me + 1) % 3) != opponent) {
             sum += 6;
-            //cout << " " << ((me + 1) % 3) << " win +6 " << endl;
-        } else {
-            //cout << endl;
         }
-    }*/
+    }
+
+    cout << sum << endl;
+}
+
+void task2() {
+    ifstream input("input2.txt");
+    int sum = 0;
+    char opponent, me;
 
     while (input >> opponent) {
         input >> me;
@@ -49,18 +43,18 @@ int main() {
         }
         me = me % 3;
         sum += me + 1;
-        //cout << " + " << me+1;
 
         if (opponent == me) {
             sum += 3;
-            //cout << " draw +3 " << endl;
         } else if (((me + 1) % 3) != opponent) {
             sum += 6;
-            //cout << " " << ((me + 1) % 3) << " win +6 " << endl;
-        } else {
-            //cout << endl;
         }
     }
 
     cout << sum << endl;
+}
+
+int main() {
+    task1();
+    task2();
 }
