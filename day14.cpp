@@ -103,7 +103,6 @@ void task1() {
             if (map.find(pair<int, int>(x, y)) == map.end()) {
                 map[pair<int, int>(x, y)] = '.';
             }
-            map[pair<int, int>(x, y)];
         }
     }
 
@@ -146,17 +145,6 @@ void task1() {
         map[pair<int, int>(sand.x, sand.y)] = 'o';
         sum++;
         sand = {500, 0};
-    }
-
-    for (int y = 0; y < 10; y++) {
-        for (int x = 494; x < 504; x++) {
-            char c = ' ';
-            if (map.find(pair<int, int>(x, y)) != map.end()) {
-                c = map[pair<int, int>(x, y)];
-            }
-            cout << c;
-        }
-        cout << endl;
     }
 
     cout << sum << endl;
@@ -202,41 +190,14 @@ void task2() {
         }
     }
 
-    int xmax = 500;
-    int xmin = 500;
     int ymax = 0;
-    int ymin = 0;
-
     for (auto& p : map) {
-        if (p.first.first > xmax) {
-            xmax = p.first.first;
-        } else if (p.first.first < xmin) {
-            xmin = p.first.first;
-        }
-
         if (p.first.second > ymax) {
             ymax = p.first.second;
-        } else if (p.first.second < ymin) {
-            ymin = p.first.second;
         }
     }
 
-    xmin -= 200;
-    xmax += 200;
     ymax += 2;
-
-    for (int y = ymin; y < ymax; y++) {
-        for (int x = xmin; x <= xmax; x++) {
-            if (map.find(pair<int, int>(x, y)) == map.end()) {
-                map[pair<int, int>(x, y)] = '.';
-            }
-            map[pair<int, int>(x, y)];
-        }
-    }
-
-    for (int x = xmin; x <= xmax; x++) {
-        map[pair<int, int>(x, ymax)] = '#';
-    }
 
     int sum = 0;
     vec2 dd = {0, 1};
@@ -247,55 +208,39 @@ void task2() {
         vec2 newSand = sand + dd;
         char c = map[pair<int, int>(newSand.x, newSand.y)];
 
-        if (c == '.') {
-            sand = newSand;
-            continue;
-        } if (/*c != '#' && c != 'o'*/ newSand.y == ymax) {
-            //break;
+        if (newSand.y == ymax) {
             goto found_floor;
         }
+
+        if (c != '#' && c != 'o') {
+            sand = newSand;
+            continue;
+        } 
 
         newSand = sand + dl;
         c = map[pair<int, int>(newSand.x, newSand.y)];
 
-        if (c == '.') {
+        if (c != '#' && c != 'o') {
             sand = newSand;
             continue;
-        } if (/*c != '#' && c != 'o'*/ newSand.y == ymax) {
-            //break;
-            goto found_floor;
         }
 
         newSand = sand + dr;
         c = map[pair<int, int>(newSand.x, newSand.y)];
 
-        if (c == '.') {
+        if (c != '#' && c != 'o') {
             sand = newSand;
             continue;
-        } /*if (c != '#' && c != 'o') {
-            break;
-        }*/
+        }
 
 found_floor:
         map[pair<int, int>(sand.x, sand.y)] = 'o';
         sum++;
         if (sand.x == 500 && sand.y == 0) {
-            cout << "exit" << endl;
             break;
         }
         sand = {500, 0};
     }
-
-    /*for (int y = ymin; y <= ymax; y++) {
-        for (int x = xmin; x <= xmax; x++) {
-            char c = ' ';
-            if (map.find(pair<int, int>(x, y)) != map.end()) {
-                c = map[pair<int, int>(x, y)];
-            }
-            cout << c;
-        }
-        cout << endl;
-    }*/
 
     cout << sum << endl;
 }
